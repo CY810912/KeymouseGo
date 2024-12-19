@@ -32,8 +32,13 @@ class UniversalEvent(Event):
             x, y = self.action
             # 兼容旧版的绝对坐标
             if not isinstance(x, int) and not isinstance(y, int):
-                x = float(re.match('([0-1].[0-9]+)%', x).group(1))
-                y = float(re.match('([0-1].[0-9]+)%', y).group(1))
+                match_x = re.match(r'(-?[0-1]\.[0-9]+)%', x)  # 支持负数
+                match_y = re.match(r'(-?[0-1]\.[0-9]+)%', y)  # 支持负数
+                if match_x and match_y:
+                    x = float(match_x.group(1))
+                    y = float(match_y.group(1))
+                else:
+                    raise ValueError(f"Invalid format for input: x={x}, y={y}")
 
             if self.action == [-1, -1]:
                 # 约定 [-1, -1] 表示鼠标保持原位置不动

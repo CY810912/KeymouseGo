@@ -67,7 +67,7 @@ def get_script_list_from_dir():
 
 def update_script_map():
     global scripts_map
-    
+
     for (i, item) in enumerate(scripts):
         scripts_map[item] = i
 
@@ -145,7 +145,7 @@ class UIFunc(QMainWindow, Ui_UIView, QtStyleTools):
         self.volumeSlider.setValue(50)
         self.volumeSlider.valueChanged.connect(
             lambda: self.player.setVolume(
-                self.volumeSlider.value()/100.0))
+                self.volumeSlider.value() / 100.0))
 
         self.running = False
         self.recording = False
@@ -277,6 +277,7 @@ class UIFunc(QMainWindow, Ui_UIView, QtStyleTools):
                     text = '%d actions recorded' % self.actioncount
                     logger.debug('Recorded %s' % event)
                     self.tnumrd.setText(text)
+
         logger.debug('Initialize at thread ' + str(threading.currentThread()))
         Recorder.setuphook()
         Recorder.set_callback(on_record_event)
@@ -655,7 +656,7 @@ class RunScriptClass(QThread):
 
     @classmethod
     def run_sub_script(cls, extension, scriptpath: str, subextension_name: str = 'Extension',
-                        runtimes: int = 1, speed: int = 100, thd=None, labeldict=None):
+                       runtimes: int = 1, speed: int = 100, thd=None, labeldict=None):
         newevents, module_name, label_dict = RunScriptClass.parsescript(scriptpath, speed=speed)
         if labeldict is None:
             labeldict = label_dict
@@ -665,7 +666,7 @@ class RunScriptClass(QThread):
             speed=speed,
             swap=extension.swap,
             thd=thd
-            )
+        )
         logger.info('Script path:%s' % scriptpath)
         k = 0
         nointerrupt = True
@@ -673,7 +674,8 @@ class RunScriptClass(QThread):
             logger.debug('========%d========' % k)
             try:
                 if newextension.onbeforeeachloop(k):
-                    nointerrupt = nointerrupt and RunScriptClass.run_script_once(newevents, newextension, thd=thd, labeldict=labeldict)
+                    nointerrupt = nointerrupt and RunScriptClass.run_script_once(newevents, newextension, thd=thd,
+                                                                                 labeldict=labeldict)
                 newextension.onaftereachloop(k)
                 k += 1
             except BreakProcess:
@@ -702,9 +704,10 @@ class RunScriptClass(QThread):
                     return False
                 thd.wait_if_pause()
                 logger.trace(
-                    '%s  [%d/%d %d/%d] %d%%' % (thd.running_text, i + 1, steps, thd.j + 1, extension.runtimes, extension.speed))
+                    '%s  [%d/%d %d/%d] %d%%' % (
+                    thd.running_text, i + 1, steps, thd.j + 1, extension.runtimes, extension.speed))
                 thd.logSignal.emit('{0} [{1}/{2}]'.format(
-                            events[i].summarystr(), i + 1, steps))
+                    events[i].summarystr(), i + 1, steps))
 
             event = events[i]
 
