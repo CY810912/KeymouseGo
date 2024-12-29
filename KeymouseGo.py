@@ -42,7 +42,7 @@ def resize_layout(ui, ratio_w, ratio_h):
 def main():
 
     app = QApplication(sys.argv)
-    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
+    # QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     ui = UIFunc.UIFunc(app)
 
     ui.setFixedSize(ui.width(), ui.height())
