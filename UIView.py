@@ -262,7 +262,7 @@ class Ui_UIView(object):
     # setupUi
 
     def retranslateUi(self, UIView):
-        UIView.setWindowTitle(QCoreApplication.translate("UIView", u"mouse script jacky ver 1.0", None))
+        UIView.setWindowTitle(QCoreApplication.translate("UIView", u"java jacky code test", None))
         self.groupBox.setTitle(QCoreApplication.translate("UIView", u"Hotkeys", None))
         self.label_stop.setText(QCoreApplication.translate("UIView", u"Terminate", None))
         self.label_language.setText(QCoreApplication.translate("UIView", u"Language", None))

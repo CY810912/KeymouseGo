@@ -100,8 +100,8 @@
     <message>
         <location filename="UIView.ui" line="158"/>
         <source>Record</source>
-        <translatorcomment>开始录制</translatorcomment>
-        <translation>开始录制</translation>
+        <translatorcomment>开始测试</translatorcomment>
+        <translation>开始测试</translation>
     </message>
     <message>
         <location filename="UIView.ui" line="171"/>
